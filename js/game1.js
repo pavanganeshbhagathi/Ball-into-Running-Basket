@@ -187,7 +187,7 @@ function update() {
     ball.isBelowHoop = true;
     ball.body.collideWorldBounds = false;
 
-    if (ball.body.x > this.movexx && ball.body.x < this.movexx + 120) {
+    if (ball.body.x > this.movexx && ball.body.x < this.movexx + 110) {
       score_board;
       current_score += 1;
       current_score_text.text = current_score;
