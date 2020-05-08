@@ -163,9 +163,7 @@ left_rim = game.add.sprite(xpos, 480, "side rim");
 function update() {
   this.movexx += 0.5;
   // console.log(this.movexx);
-  if (this.movexx > width) {
-    this.movexx = 60;
-  }
+
   if (ball && ball.body.velocity.y > 0) {
     // this.front_rim = game.add.sprite(this.movexx, 182, "front rim"); //480
     ball.body.collides([collisionGroup], this);
@@ -194,6 +192,7 @@ function update() {
     this.hoop.x = 0;
     this.left_rim.x = 60;
     this.right_rim.x = 160;
+    this.movexx = 60;
   }
   if (
     ball &&
@@ -204,7 +203,7 @@ function update() {
     ball.isBelowHoop = true;
     ball.body.collideWorldBounds = false;
 
-    if (ball.body.x > this.movexx && ball.body.x < this.movexx + 190) {
+    if (ball.body.x > this.movexx && ball.body.x < this.movexx + 120) {
       score_board;
       current_score += 1;
       current_score_text.text = current_score;
