@@ -8,12 +8,16 @@ var game = new Phaser.Game(width, height, Phaser.CANVAS, "", {
   update: update,
 });
 
-
 function preload() {
   game.load.image("ball", "images/ball.png");
   game.load.image("hoop", "images/hoop.png");
   game.load.image("side rim", "images/side_rim.png");
   game.load.image("front rim", "images/front_rim.png");
+  game.load.image("background", "images/ground.jpg", {
+    frameWidth: width,
+    frameHeight: height,
+  });
+
   //    this.load.spritesheet("ball2", "images/ball2.png", {
   //      frameWidth: 16,
   //      frameHeight: 16,        //    });
@@ -30,11 +34,10 @@ var hoop,
   high_score_text,
   current_best_text;
 
-
 var movexx;
 
 var collisionGroup;
-
+//                              create
 function create() {
   game.physics.startSystem(Phaser.Physics.P2JS);
 
@@ -79,13 +82,8 @@ function create() {
     fill: "#00e6e6",
     align: "center",
   });
-  var nextpage = game.add.text(400, 300, "", {
-    font: "Arial",
-    fontSize: "100px",
-    fill: "green",
-    align: "center",
-  });
-  this.text1 = this.add.text(100, 500, "Level:1", {
+
+  this.text1 = this.add.text(100, 600, "Level:1", {
     font: "Arial",
     fontSize: "20px",
     fill: "green",
@@ -111,12 +109,22 @@ function create() {
   var instructions = document.createElement("span");
 
   document.body.appendChild(instructions);
-  this.movexx = 0;
+  // background = game.add.sprite(0, 0, "background");
+  // background.width = width;
+  //background.height = height;
+  /*this.mountainsBack = this.game.add.tileSprite(
+    0,
+  this.game.height - this.game.cache.getImage("background").height,
+  this.game.width,
+    this.game.cache.getImage("background").height,
+    "background"
+  );*/
+
+  this.movexx = 60;
   this.hoop = game.add.sprite(0, 62, "hoop"); //420
 
   this.left_rim = game.add.sprite(60, 184, "side rim"); //480-420=60
   this.right_rim = game.add.sprite(100, 184, "side rim"); //580  580-480=100
-
   /*  this.tween.add({
         targets: left_rim,
         duration: 5000,
@@ -151,12 +159,12 @@ left_rim = game.add.sprite(xpos, 480, "side rim");
   //  hoop.body.static = true;
   //  hoop.body.velocity.x = -150;
 }
-
+//                                           update
 function update() {
   this.movexx += 0.5;
   // console.log(this.movexx);
   if (this.movexx > width) {
-    this.movexx = 0;
+    this.movexx = 60;
   }
   if (ball && ball.body.velocity.y > 0) {
     // this.front_rim = game.add.sprite(this.movexx, 182, "front rim"); //480
@@ -195,26 +203,25 @@ function update() {
   ) {
     ball.isBelowHoop = true;
     ball.body.collideWorldBounds = false;
-    console.log(this.movexx + 100);
-    if (ball.body.x > this.movexx + 60 && ball.body.x < this.movexx + 190) {
+
+    if (ball.body.x > this.movexx && ball.body.x < this.movexx + 190) {
       score_board;
       current_score += 1;
       current_score_text.text = current_score;
       console.log(current_score);
       if (current_score == 1) {
-        this.text2 = this.add.text(300, 300, "your promated next level", {
+        this.text2 = this.add.text(300, 300, "you promated next level", {
           font: "Arial",
           fontSize: "40px",
           fill: "green",
         });
         console.log("calling");
-        window.open("./index2.html", "_self")
+        window.open("./index2.html", "_self");
       }
     } else {
       if (current_score > high_score) {
         score_board;
         high_score = current_score;
-
       }
 
       score_board;
@@ -242,7 +249,8 @@ function createBall() {
   }
 
   ball = game.add.sprite(xpos, 550, "ball");
-  game.add.tween(ball.scale).from({
+  game.add.tween(ball.scale).from(
+    {
       x: 0.7,
       y: 0.7,
     },
@@ -304,7 +312,8 @@ function launch(x_traj) {
     current_best_score_text.text = "";
     ball.launched = true;
     game.physics.p2.gravity.y = 3000;
-    game.add.tween(ball.scale).to({
+    game.add.tween(ball.scale).to(
+      {
         x: 0.6,
         y: 0.6,
       },
