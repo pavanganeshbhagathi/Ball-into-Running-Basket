@@ -1,11 +1,15 @@
 body {
     margin: 0;
     padding: 10px;
+
 }
 
 canvas {
     margin: 0 auto;
     border: 1px solid grey;
+    background-image: url('./images/ground.jpg');
+    background-repeat: no-repeat;
+
 }
 
 h3 {

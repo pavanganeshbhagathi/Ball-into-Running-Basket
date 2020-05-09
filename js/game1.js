@@ -223,8 +223,7 @@ function createBall() {
   }
 
   ball = game.add.sprite(xpos, 550, "ball");
-  game.add.tween(ball.scale).from(
-    {
+  game.add.tween(ball.scale).from({
       x: 0.7,
       y: 0.7,
     },
@@ -286,8 +285,7 @@ function launch(x_traj) {
     current_best_score_text.text = "";
     ball.launched = true;
     game.physics.p2.gravity.y = 3000;
-    game.add.tween(ball.scale).to(
-      {
+    game.add.tween(ball.scale).to({
         x: 0.6,
         y: 0.6,
       },

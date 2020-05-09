@@ -208,7 +208,7 @@ function update() {
       current_score += 1;
       current_score_text.text = current_score;
       console.log(current_score);
-      if (current_score == 1) {
+      if (current_score == 3) {
         this.text2 = this.add.text(300, 300, "you promated next level", {
           font: "Arial",
           fontSize: "40px",
@@ -248,8 +248,7 @@ function createBall() {
   }
 
   ball = game.add.sprite(xpos, 550, "ball");
-  game.add.tween(ball.scale).from(
-    {
+  game.add.tween(ball.scale).from({
       x: 0.7,
       y: 0.7,
     },
@@ -311,12 +310,12 @@ function launch(x_traj) {
     current_best_score_text.text = "";
     ball.launched = true;
     game.physics.p2.gravity.y = 3000;
-    game.add.tween(ball.scale).to(
-      {
+    game.add.tween(ball.scale).to({
         x: 0.6,
         y: 0.6,
       },
       500,
+
       Phaser.Easing.Linear.None,
       true,
       0,
@@ -326,5 +325,6 @@ function launch(x_traj) {
     ball.body.velocity.x = x_traj;
     ball.body.velocity.y = -1850;
     ball.body.rotateRight(x_traj / 3);
+    // ball.body.rotateLeft(x_traj / 2);
   }
 }
